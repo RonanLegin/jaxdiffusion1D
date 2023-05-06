@@ -5,15 +5,15 @@ def get_default_configs():
   config = ml_collections.ConfigDict()
   # training
   config.training = training = ml_collections.ConfigDict()
-  config.training.batch_size = 4
-  training.n_iters = 1000001
+  config.training.batch_size = 64
+  training.n_iters = 10000001
   training.snapshot_freq = 2000
   training.log_freq = 100
   training.eval_freq = 100
   ## store additional checkpoints for preemption in cloud computing environments
   training.snapshot_freq_for_preemption = 10000
   ## produce samples at each snapshot.
-  training.snapshot_sampling = True
+  training.snapshot_sampling = False
   training.likelihood_weighting = False
   training.continuous = True
   training.n_jitted_steps = 1
@@ -55,19 +55,19 @@ def get_default_configs():
 
   # model
   config.model = model = ml_collections.ConfigDict()
-  model.sigma_min = 0.01
-  model.sigma_max = 50.0
+  model.sigma_min = 0.1
+  model.sigma_max = 2000.0
   model.num_scales = 2000
-  model.beta_min = 0.1
+  model.beta_min = 0.0
   model.beta_max = 20.
-  model.dropout = 0.1
+  model.dropout = 0.0
   model.embedding_type = 'fourier'
 
   # optimization
   config.optim = optim = ml_collections.ConfigDict()
   optim.weight_decay = 0
   optim.optimizer = 'Adam'
-  optim.lr = 2e-4
+  optim.lr = 1e-5
   optim.beta1 = 0.9
   optim.eps = 1e-8
   optim.warmup = 5000
